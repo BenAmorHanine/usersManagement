@@ -1,7 +1,7 @@
 // routes/roles.js
 const express = require('express');
 const router = express.Router();
-const roleController = require('../controllers/roleController');
+const roleController = require('../controllers/roleController.js');
 
 
 // Routes pour les rôles

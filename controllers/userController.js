@@ -1,7 +1,7 @@
 
 const User = require('../models/usermodel');
 
-//pour verifier la validité des données 
+//pour verifier la validité des données
 const validateUserData = (user) => {
     if (typeof user.username !== 'string' || user.username.length < 3 || user.username.length > 30) {
       return 'Le nom d\'utilisateur est invalide.';
