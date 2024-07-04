@@ -18,6 +18,26 @@ const validateUserData = (user) => {
     return null;
   };
 
+  //creer utilisateur v1(without role id)
+  exports.createUser1 = async (req, res) => {
+    try {
+      const { username, email, password } = req.body;
+      if (!username || !email || !password) {
+          return res.status(400).json({ message: 'Tous les champs sont requis.' });
+        }
+  
+        const validationError = validateUserData({ username, email, password });
+      if (validationError) {
+        return res.status(400).json({ message: validationError });
+      }
+      const newUser = new User({ username, email, password });
+      await newUser.save();
+      res.status(201).json({ message: 'Utilisateur créé avec succès.', user: newUser });
+    } catch (error) {
+      console.error('Erreur lors de la création de l\'utilisateur:', error);
+      res.status(500).json({ message: 'Erreur interne du serveur.' });
+    }
+  };
 
 // Créer un nouvel utilisateur
 exports.createUser = async (req, res) => {

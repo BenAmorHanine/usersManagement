@@ -11,12 +11,5 @@ db.on('error', console.error.bind(console, 'Erreur de connexion à MongoDB :'));
 db.once('open', () => {
   console.log(`Connecté à la base de données `);
 });
-
-console.log('hey1');
-
-
 module.exports = db;
-
-
-console.log('hey');
 

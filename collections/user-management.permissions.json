@@ -1,0 +1,133 @@
+[{
+  "_id": {
+    "$oid": "6686972247974d16f17f81ed"
+  },
+  "name": "view-list-devs"
+},
+{
+  "_id": {
+    "$oid": "6686972247974d16f17f81ee"
+  },
+  "name": "view-list-testors"
+},
+{
+  "_id": {
+    "$oid": "6686972247974d16f17f81ef"
+  },
+  "name": "view-list-all-users"
+},
+{
+  "_id": {
+    "$oid": "6686972247974d16f17f81f0"
+  },
+  "name": "view-list-responsibles"
+},
+{
+  "_id": {
+    "$oid": "6686972247974d16f17f81f1"
+  },
+  "name": "view-list-simple-users"
+},
+{
+  "_id": {
+    "$oid": "6686972247974d16f17f81f2"
+  },
+  "name": "view-data-all"
+},
+{
+  "_id": {
+    "$oid": "6686972247974d16f17f81f3"
+  },
+  "name": "view-roles"
+},
+{
+  "_id": {
+    "$oid": "6686972247974d16f17f81f4"
+  },
+  "name": "view-admins"
+},
+{
+  "_id": {
+    "$oid": "6686972247974d16f17f81f5"
+  },
+  "name": "delete-user"
+},
+{
+  "_id": {
+    "$oid": "6686972247974d16f17f81f6"
+  },
+  "name": "delete-dev"
+},
+{
+  "_id": {
+    "$oid": "6686972247974d16f17f81f7"
+  },
+  "name": "delete-testor"
+},
+{
+  "_id": {
+    "$oid": "6686972247974d16f17f81f8"
+  },
+  "name": "delete-responsible"
+},
+{
+  "_id": {
+    "$oid": "6686972247974d16f17f81f9"
+  },
+  "name": "delete-role"
+},
+{
+  "_id": {
+    "$oid": "6686972247974d16f17f81fa"
+  },
+  "name": "update-own-data"
+},
+{
+  "_id": {
+    "$oid": "6686972247974d16f17f81fb"
+  },
+  "name": "update-role-of-users"
+},
+{
+  "_id": {
+    "$oid": "6686972247974d16f17f81fc"
+  },
+  "name": "add-admin"
+},
+{
+  "_id": {
+    "$oid": "6686972247974d16f17f81fd"
+  },
+  "name": "add-dev"
+},
+{
+  "_id": {
+    "$oid": "6686972247974d16f17f81fe"
+  },
+  "name": "add-testor"
+},
+{
+  "_id": {
+    "$oid": "6686972247974d16f17f81ff"
+  },
+  "name": "delete-dev"
+},
+{
+  "_id": {
+    "$oid": "6686972247974d16f17f8200"
+  },
+  "name": "delete-testor"
+},
+{
+  "_id": {
+    "$oid": "6686972247974d16f17f8201"
+  },
+  "name": "delete-responsible"
+},
+{
+  "_id": {
+    "$oid": "66869cf8ee8b0bb4faa20154"
+  },
+  "name": "todo",
+  "__v": 0
+}]

@@ -3,10 +3,14 @@ const Schema = mongoose.Schema;
 const validator = require('validator');
 const UserSchema = new Schema({
   username: { type: String, required: true , minlength: 3, maxlength: 30 },
+  
   email: { type: String, required: true,  unique: true, match: /.+\@.+\..+/, validate: {validator: validator.isEmail} },
+  
   password: { type: String, required: true, minlength: 6 },
   //userType: { type: String, enum: ['admin', 'normal'], required: true },
-  role : {type :Schema.Types.ObjectId, ref: 'Role', required: true},
+  
+ role : {type :Schema.Types.ObjectId, ref: 'Role', required: true, default : '668686173781f594882a1d37'},
+  
   createdAt: { type: Date, default: Date.now }
 });
 

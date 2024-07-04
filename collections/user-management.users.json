@@ -1,0 +1,60 @@
+[{
+  "_id": {
+    "$oid": "6686885f087cb4431b85b5ad"
+  },
+  "username": "manel",
+  "email": "manel@gmail.com",
+  "password": "ehehhe",
+  "role": {
+    "$oid": "66869b9a47974d16f17f8209"
+  },
+  "createdAt": {
+    "$date": "2024-07-04T11:32:47.448Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668689bc087cb4431b85b5af"
+  },
+  "username": "hanine",
+  "email": "hanine@gmail.com",
+  "password": "blababl",
+  "role": {
+    "$oid": "66869b9a47974d16f17f820c"
+  },
+  "createdAt": {
+    "$date": "2024-07-04T11:38:36.039Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668689c5087cb4431b85b5b1"
+  },
+  "username": "yassine",
+  "email": "yassine@gmail.com",
+  "password": "blaaababl",
+  "role": {
+    "$oid": "66869b9a47974d16f17f820d"
+  },
+  "createdAt": {
+    "$date": "2024-07-04T11:38:45.876Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "668689cb087cb4431b85b5b3"
+  },
+  "username": "ranime",
+  "email": "ranime@gmail.com",
+  "password": "blabableee",
+  "role": {
+    "$oid": "668686173781f594882a1d37"
+  },
+  "createdAt": {
+    "$date": "2024-07-04T11:38:51.942Z"
+  },
+  "__v": 0
+}]
