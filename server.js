@@ -11,7 +11,7 @@ app.use(express.urlencoded({extended: false }))
 
 // Importation des controllers
 const userController = require('./controllers/userController');
-const roleController = require('./controllers/roleController.js');
+const roleController = require('./controllers/roleController');
 const permissionController = require('./controllers/permissionController.js');
 
 // Importation des routes
@@ -30,8 +30,8 @@ app.get('/', (req, res) => {
   });
   
   app.get('/users', userController.getAllUsers);
-  app.get('/roles/all', userController.getAllroles);
-  app.get('/permissions/all', permissionController.getAllPermissions);
+  app.get('/roles', roleController.getAllRoles);
+  app.get('/permissions', permissionController.getAllPermissions);
 
   app.post('/users/signup', userController.createUser);
   app.post('/roles/createrole', roleController.createRole);
