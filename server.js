@@ -13,16 +13,19 @@ app.use(express.urlencoded({extended: false }))
 const userController = require('./controllers/userController');
 const roleController = require('./controllers/roleController');
 const permissionController = require('./controllers/permissionController.js');
+const authController = require('./controllers/authcontroller.js');
 
 // Importation des routes
 const userRoutes = require('./routes/users');
 const roleRoutes = require('./routes/roles');
 const permissionRoutes = require('./routes/permissions');
+const authRoutes = require('./routes/auth');
 
 // Utilisation des routes
 app.use('/api', userRoutes);
 app.use('/api', roleRoutes);
 app.use('/api', permissionRoutes);
+app.use('/api', authRoutes);
 
 
 app.get('/', (req, res) => {
@@ -33,9 +36,13 @@ app.get('/', (req, res) => {
   app.get('/roles', roleController.getAllRoles);
   app.get('/permissions', permissionController.getAllPermissions);
 
-  app.post('/users/signup', userController.createUser);
+  app.post('/users/createuser', userController.createUser);
   app.post('/roles/createrole', roleController.createRole);
   app.post('/permissions/createpermission', permissionController.createPermission);
+
+  app.post('/login', authController.login);
+  app.post('/signup', authController.signup);
+
  
   // Middleware pour gérer les routes non trouvées
   app.use((req, res, next) => {
