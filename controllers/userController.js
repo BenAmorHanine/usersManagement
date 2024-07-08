@@ -53,6 +53,45 @@ exports.getAllUsers = async (req, res) => {
     res.status(500).json({ message: 'Erreur interne du serveur.' });
   }
 };
+// Get users with role 'dev'
+exports.getDevs = async (req, res) => {
+  try {
+    const devs = await User.find({ role: 'dev' });
+    if (devs.length === 0) {
+      return res.status(404).json({ message: 'Aucun développeur trouvé.' });
+    }
+    res.status(200).json(devs);
+  } catch (error) {
+    console.error('Erreur lors de la récupération des développeurs:', error);
+    res.status(500).json({ message: 'Erreur interne du serveur.' });
+  }
+};
+// Get users with role 'testor'
+exports.getTestors = async (req, res) => {
+  try {
+    const devs = await User.find({ role: 'testor' });
+    if (devs.length === 0) {
+      return res.status(404).json({ message: 'Aucun développeur trouvé.' });
+    }
+    res.status(200).json(devs);
+  } catch (error) {
+    console.error('Erreur lors de la récupération des développeurs:', error);
+    res.status(500).json({ message: 'Erreur interne du serveur.' });
+  }
+};
+// Get users with role 'simple-user' //msh aajebni l essm
+exports.getCondidats = async (req, res) => {
+  try {
+    const devs = await User.find({ role: 'simple-user' });
+    if (devs.length === 0) {
+      return res.status(404).json({ message: 'Aucun développeur trouvé.' });
+    }
+    res.status(200).json(devs);
+  } catch (error) {
+    console.error('Erreur lors de la récupération des développeurs:', error);
+    res.status(500).json({ message: 'Erreur interne du serveur.' });
+  }
+};
 
 // Récupérer un utilisateur par ID
 exports.getUserById = async (req, res) => {
@@ -73,6 +112,25 @@ exports.getUserById = async (req, res) => {
     res.status(500).json({ message: 'Erreur interne du serveur.' });
   }
 };
+
+
+exports.getUserData = async (req, res) => {
+  try {
+    const userId = req.user.id; // Get user ID from the decoded token
+
+    const user = await User.findById(userId).select('-password'); // Exclude the password field
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    console.error('Error fetching user data:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+
 
 // Mettre à jour un utilisateur par ID
 exports.updateUserById = async (req, res) => {
@@ -95,6 +153,113 @@ exports.updateUserById = async (req, res) => {
   }
 };
 
+// Update own data except role
+exports.updateUserAccount = async (req, res) => {
+  try {
+    const userId = req.user.id; // Get user ID from the decoded token
+
+    // Exclude the role field from the update
+    const { role, ...updateData } = req.body;
+
+    const updatedUser = await User.findByIdAndUpdate(userId, updateData, {
+      new: true,
+      runValidators: true,
+    }).select('-password'); // Exclude the password field
+
+    if (!updatedUser) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    console.error('Error updating user data:', error);
+    res.status(500).json({ message: 'Server error' });
+  }
+};
+
+// Update user's role to 'dev'
+exports.updateRoleToDev = async (req, res) => {
+  try {
+    const { userId } = req.params; // Extract userId from request parameters
+
+    // Check if user exists
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'Utilisateur non trouvé.' });
+    }
+
+    user.role = 'dev';
+    await user.save();
+
+    res.status(200).json({ message: 'Rôle mis à jour avec succès.', user: user });
+  } catch (error) {
+    console.error('Erreur lors de la mise à jour du rôle à "dev":', error);
+    res.status(500).json({ message: 'Erreur interne du serveur.' });
+  }
+};
+
+// Update user's role to 'testor'
+exports.updateRoleToTestor = async (req, res) => {
+  try {
+    const { userId } = req.params; // Extract userId from request parameters
+
+    // Check if user exists
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'Utilisateur non trouvé.' });
+    }
+    
+    user.role = 'testor';
+    await user.save();
+
+    res.status(200).json({ message: 'Rôle mis à jour avec succès.', user: user });
+  } catch (error) {
+    console.error('Erreur lors de la mise à jour du rôle à "dev":', error);
+    res.status(500).json({ message: 'Erreur interne du serveur.' });
+  }
+};
+// Update user's role to 'Resp-dev'
+exports.updateRoleToRespDev = async (req, res) => {
+  try {
+    const { userId } = req.params; // Extract userId from request parameters
+
+    // Check if user exists
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'Utilisateur non trouvé.' });
+    }
+    
+    user.role = 'Responsible-dev';
+    await user.save();
+
+    res.status(200).json({ message: 'Rôle mis à jour avec succès.', user: user });
+  } catch (error) {
+    console.error('Erreur lors de la mise à jour du rôle à "dev":', error);
+    res.status(500).json({ message: 'Erreur interne du serveur.' });
+  }
+};
+// Update user's role to 'Responsible-test'
+exports.updateRoleToRespTest = async (req, res) => {
+  try {
+    const { userId } = req.params; // Extract userId from request parameters
+
+    // Check if user exists
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'Utilisateur non trouvé.' });
+    }
+    
+    user.role = 'Responsible-testor';
+    await user.save();
+
+    res.status(200).json({ message: 'Rôle mis à jour avec succès.', user: user });
+  } catch (error) {
+    console.error('Erreur lors de la mise à jour du rôle à "dev":', error);
+    res.status(500).json({ message: 'Erreur interne du serveur.' });
+  }
+};
+
+
 // Supprimer un utilisateur par ID
 exports.deleteUserById = async (req, res) => {
   try {
@@ -103,9 +268,75 @@ exports.deleteUserById = async (req, res) => {
     if (!deletedUser) {
       return res.status(404).json({ message: 'Utilisateur non trouvé.' });
     }
+    
     res.status(200).json({ message: 'Utilisateur supprimé avec succès.', user: deletedUser });
   } catch (error) {
     console.error('Erreur lors de la suppression de l\'utilisateur par ID:', error);
     res.status(500).json({ message: 'Erreur interne du serveur.' });
   }
 };
+//findbyid et findByIdAndDelete are predefined by mongoose lib
+//autreversion pour:
+/*
+// Delete user by ID
+exports.deleteUserById = async (req, res) => {
+  try {
+    const userId = req.params.userId; // Extract userId from request parameters
+
+    // Check if user exists
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'Utilisateur non trouvé.' });
+    }
+
+    // Perform deletion
+    const deletedUser = await User.findByIdAndDelete(userId);
+
+    if (!deletedUser) {
+      return res.status(404).json({ message: 'Utilisateur non trouvé.' });
+    }
+
+    res.status(200).json({ message: 'Utilisateur supprimé avec succès.', user: deletedUser });
+  } catch (error) {
+    console.error('Erreur lors de la suppression de l\'utilisateur par ID:', error);
+    res.status(500).json({ message: 'Erreur interne du serveur.' });
+  }
+};
+*/
+// Delete own account
+exports.deleteUserAccount = async (req, res) => {
+  try {
+    const userId = req.user.id;
+
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' });
+    }
+
+    await User.findByIdAndDelete(userId);
+    res.json({ message: 'Account deleted successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error', error });
+  }
+};
+
+// Change user's role from 'dev' to 'simple-user'
+exports.removeWorkerFromJob = async (req, res) => {
+  try {
+    const userId = req.params.userId; // Extract userId from request parameters
+
+    // Check if user exists
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'Utilisateur non trouvé.' });
+    }
+    user.role = 'simple-user';
+    await user.save();
+
+    res.status(200).json({ message: 'Le travailleur a été retiré de son poste avec succès.', user });
+  } catch (error) {
+    console.error('Erreur lors de la modification du rôle du travailleur :', error);
+    res.status(500).json({ message: 'Erreur interne du serveur.' });
+  }
+};
+

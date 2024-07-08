@@ -7,7 +7,7 @@ exports.protect = (req, res, next) => {
 
   jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
     if (err) return res.status(401).json({ message: 'Unauthorized' });
-    req.user = decoded;
+    req.user = decoded; //to Attach the decoded user information to the request object
     next();
   });
 };
