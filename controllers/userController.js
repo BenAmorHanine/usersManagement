@@ -115,7 +115,7 @@ exports.getUserData = async (req, res) => {
 
 
 
-// Mettre à jour un utilisateur par ID
+// Mettre à jour un utilisateur par ID , peut aussi changer son role 
 exports.updateUserById = async (req, res) => {
   try {
     const userId = req.params.id;
@@ -143,11 +143,25 @@ exports.updateUserAccount = async (req, res) => {
 
     // Exclude the role field from the update
     const { role, ...updateData } = req.body;
+    if (role) {
+      return res.status(403).json({ message: 'You are not allowed to change your role.' });
+    }
 
-    const updatedUser = await User.findByIdAndUpdate(userId, updateData, {
-      new: true,
-      runValidators: true,
-    }).select('-password'); // Exclude the password field
+    const validationError = validateUserData(updateData);
+if (validationError) {
+  return res.status(400).json({ message: validationError });
+}
+/* // the hashing is in the pre('save') in the model, isnt it enough?
+if (updateData.password) {
+  if (updateData.password.length < 6) {
+    return res.status(400).json({ message: 'Password must be at least 6 characters long.' });
+  }
+  updateData.password = await bcrypt.hash(updateData.password, 10);
+}*/
+  const updatedUser = await User.findByIdAndUpdate(userId, updateData, {
+    new: true,
+    runValidators: true,
+  }).select('-password'); // Exclude the password field from the object returned in the response
 
     if (!updatedUser) {
       return res.status(404).json({ message: 'User not found' });

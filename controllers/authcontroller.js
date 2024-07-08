@@ -3,7 +3,7 @@ const bcrypt = require('bcrypt');
 const User = require('../models/usermodel');
 const Role = require('../models/rolemodel');
 const validateUserData  = require('../tools/validateUserData');
-const generateToken  = require('../tools/generateToken');
+const generateToken  = require('../tools/generatetoken');
 
 require('dotenv').config();
 
