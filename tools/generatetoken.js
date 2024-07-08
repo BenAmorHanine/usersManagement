@@ -10,6 +10,8 @@ const generateToken = (user) => {
 };
 
 module.exports = generateToken;
+
+
 //ma naarsh emta nsttamlou qali alih waqt fassarli lpartie loula (protect function) mtea authmiddleware:
 //heres the example he gave me :
 //ama eny amalt ythhorli haja haka fl authcontroller fl login belk nwali juste naaml modulation du code ken naffsou o khw

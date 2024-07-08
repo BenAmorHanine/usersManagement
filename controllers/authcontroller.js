@@ -2,24 +2,10 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const User = require('../models/usermodel');
 const Role = require('../models/rolemodel');
-require('dotenv').config();
+const validateUserData  = require('../tools/validateUserData');
+const generateToken  = require('../tools/generateToken');
 
-//pour verifier la validité des données
-const validateUserData = (user) => {
-    if (typeof user.username !== 'string' || user.username.length < 3 || user.username.length > 30) {
-      return 'Le nom d\'utilisateur est invalide.';
-    }
-  
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(user.email)) {
-      return 'L\'adresse email est invalide.';
-    }
-  
-    if (typeof user.password !== 'string' || user.password.length < 6) {
-      return 'Le mot de passe doit contenir au moins 6 caractères.';
-    }
-  
-    return null;
-  };
+require('dotenv').config();
 
 exports.signup = async (req, res) => {
     try {
@@ -45,23 +31,27 @@ exports.signup = async (req, res) => {
       const hashedPassword = await bcrypt.hash(password, 10);
   
       // Find the role in the database
+    let userRoleId = '668686173781f594882a1d37'; // Default role ObjectId for simple-user
+    if (role) {
       const userRole = await Role.findOne({ name: role });
       if (!userRole) {
         return res.status(400).json({ message: 'Invalid role' });
       }
-  
+      userRoleId = userRole._id;
+    }
       // Create a new user
       const newUser = new User({
         username,
         email,
         password: hashedPassword,
-        role: userRole._id
+        role: userRoleId
       });
   
       await newUser.save();
   
       // Generate a token for the new user
-      const token = jwt.sign({ userId: newUser._id, role: userRole.name }, process.env.JWT_SECRET, { expiresIn: '1h' });
+      const secret = process.env.JWT_SECRET || 'default_secret_key';
+      const token = generateToken(newUser,secret);
   
       res.status(201).json({ token, role: userRole.name });
     } catch (error) {
@@ -75,22 +65,20 @@ exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
 
-    console.log('Received email:', email); // Check what email is received
-    console.log('Received password:', password); // Check what password is received
-
     const user = await User.findOne({ email }).populate('role');
 
-    console.log('Found user:', user); // Check the user object returned from the database
-   // if(!user || password !== user.password){
+   
     if (!user || !(await bcrypt.compare(password, user.password))) {
-        console.log('Authentication failed'); // Add a log to check if authentication failed
+        console.log('Authentication failed');
       return res.status(401).json({ message: 'Invalid email or password' });
     }
     const secret = process.env.JWT_SECRET || 'default_secret_key';
-    const token = jwt.sign({ userId: user._id, role: user.role.name }, secret, { expiresIn: '5h' });
+    const token = generateToken(user, secret);
+
     res.json({ token, role: user.role.name, message: "Welcome" });
   } catch (error) {
     console.error('Error during login:', error);
     res.status(500).json({ message: 'Internal server error' });
   }
 };
+
