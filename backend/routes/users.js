@@ -19,6 +19,7 @@ router.get('/users/condidats',authMiddleware.protect,authMiddleware.restrictTo('
 router.get('/users/devs',authMiddleware.protect,authMiddleware.restrictTo(['admin','responsible-dev']), userController.getDevs);
 router.get('/users/testors',authMiddleware.protect,authMiddleware.restrictTo(['admin','responsible-test']), userController.getTestors);
 router.get('/users/:id',authMiddleware.protect,authMiddleware.restrictTo('admin'), userController.getUserById);
+//bsh nzidou haja de telle facon kol resp puisque andou lhaq yshouf liste des ing yshouf leurs details 
 
 //admin only
 router.put('/users/:id',authMiddleware.protect,authMiddleware.restrictTo('admin'), userController.updateUserById);
@@ -30,6 +31,7 @@ router.put('/users/:id/role/test',authMiddleware.protect,authMiddleware.restrict
 router.put('/users/:id/role/respdev',authMiddleware.protect,authMiddleware.restrictTo('admin'), userController.updateRoleToRespDev);
 router.put('/users/:id/role/resptest',authMiddleware.protect,authMiddleware.restrictTo('admin'), userController.updateRoleToRespTest);
 
+//removing(updating to simple-user)
 router.put('/users/:id/removeResp', authMiddleware.protect, authMiddleware.restrictTo('admin'), userController.removeWorkerFromJob); // Admin ydesmisionni responsable
 router.put('/users/:id/removeDev', authMiddleware.protect, authMiddleware.restrictTo(['admin','responsible-dev']), userController.removeWorkerFromJob); // démisionner dev
 router.put('/users/:id/removeTest', authMiddleware.protect, authMiddleware.restrictTo(['admin','responsible-testor']), userController.removeWorkerFromJob); // démisionner test
