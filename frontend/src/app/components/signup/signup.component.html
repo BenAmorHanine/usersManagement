@@ -1,33 +1,40 @@
-<p>signup works!</p>
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Sign Up</title>
+<div class="container">
+	<div class="screen">
+		<div class="screen__content">
+			<form class="login">
+        <div class="login__field">
+					<i class="login__icon fas fa-lock"></i>
+					<input type="text" name="username" [(ngModel)]="signupObj.username" class="login__input" placeholder="Username">
+				</div>
+				<div class="login__field">
+					<i class="login__icon fas fa-user"></i>
+					<input type="email" name="Email" [(ngModel)]="signupObj.Email" class="login__input" placeholder=" Email">
+				</div>
 
-<link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
-</head>
-<body>
-	<div class="main">
-		<input type="checkbox" id="chk" aria-hidden="true">
+				<div class="login__field">
+					<i class="login__icon fas fa-lock"></i>
+					<input type="password" name="password" [(ngModel)]="signupObj.password" class="login__input" placeholder="Password">
+				</div>
 
-			<div class="signup">
-				<form>
-					<label for="chk" aria-hidden="true">Sign up</label>
-					<input type="text" name="username" placeholder="User name" required="">
-					<input type="email" name="email" placeholder="Email" required="">
-          <input type="password" name="password" placeholder="password" required="">
-					<button>Sign up</button>
-				</form>
+				<button class="button login__submit" type="submit" (click)="Signup(($event))" >
+					<span class="button__text">Register Now</span>
+					<i class="button__icon fas fa-chevron-right"></i>
+				</button>
+			</form>
+      <div class="signup-link">
+        <a  (click)="goToLogin(($event))" href="#">already have an account? </a>
+    </div>
+
+
 			</div>
 
-			<div class="login">
-				<form>
-					<label for="chk" aria-hidden="true">Login</label>
-					<input type="email" name="email" placeholder="Email" required="">
-					<input type="password" name="pswd" placeholder="Password" required="">
-					<button>Login</button>
-				</form>
-			</div>
+		<div class="screen__background">
+			<span class="screen__background__shape screen__background__shape4"></span>
+			<span class="screen__background__shape screen__background__shape3"></span>
+			<span class="screen__background__shape screen__background__shape2"></span>
+			<span class="screen__background__shape screen__background__shape1"></span>
+		</div>
+
 	</div>
-</body>
-</html>
+
+</div>

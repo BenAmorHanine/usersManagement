@@ -5,19 +5,19 @@
 			<form class="login">
 				<div class="login__field">
 					<i class="login__icon fas fa-user"></i>
-					<input type="email" name="Email" [(ngModel)]="loginObj.Email" class="login__input" placeholder="User name / Email">
+					<input type="email" name="Email" [(ngModel)]="loginObj.Email" class="login__input" placeholder=" Email" required>
 				</div>
 				<div class="login__field">
 					<i class="login__icon fas fa-lock"></i>
-					<input type="password" name="password" [(ngModel)]="loginObj.password" class="login__input" placeholder="Password">
+					<input type="password" name="password" [(ngModel)]="loginObj.password" class="login__input" placeholder="Password" required>
 				</div>
-				<button class="button login__submit" type="submit" (click)="login()" >
+				<button class="button login__submit" type="submit" (click)="login(($event))" >
 					<span class="button__text">Log In Now</span>
 					<i class="button__icon fas fa-chevron-right"></i>
 				</button>
 			</form>
       <div class="signup-link">
-        <a  (click)="goToSignUp()" href="#">SIGN UP </a>
+        <a  (click)="goToSignUp($event)" href="#">Register Now </a>
     </div>
 
 
