@@ -1,14 +1,21 @@
 const express= require('express');
 const mongoose = require('mongoose');
 const db = require('./dbconfig');
+const cors =require ('cors');
+const bodyParser = require('body-parser');
 
 
 const app = express();
 const port = process.env.PORT|| 3000 ;
 
 app.use(express.json());
-app.use(express.urlencoded({extended: false }))
-
+app.use(bodyParser.json());
+app.use(cors());
+//app.use(express.urlencoded({extended: false }));
+/*Header('Access-Control-Allow-Origin:  *');
+Header('Access-Control-Allow-Methods:  GET, POST, PUT, DELETE, OPTIONS');
+Header('Access-Control-Allow-Headers:  Content-Type, Authorization, X-Requested-With, x-Auth-Token, Origin');
+*/
 // Importation des controllers
 const userController = require('./controllers/userController');
 const roleController = require('./controllers/roleController');
@@ -22,10 +29,10 @@ const permissionRoutes = require('./routes/permissions');
 const authRoutes = require('./routes/auth');
 
 // Utilisation des routes
-app.use('/api', userRoutes);
-app.use('/api', roleRoutes);
-app.use('/api', permissionRoutes);
-app.use('/api', authRoutes);
+app.use('/', userRoutes);
+app.use('/', roleRoutes);
+app.use('/', permissionRoutes);
+app.use('/', authRoutes);
 
 
 app.get('/', (req, res) => {
@@ -35,6 +42,7 @@ app.get('/', (req, res) => {
   app.get('/users', userController.getAllUsers);
   app.get('/roles', roleController.getAllRoles);
   app.get('/permissions', permissionController.getAllPermissions);
+  
 
   app.post('/users/createuser', userController.createUser);
   app.post('/roles/createrole', roleController.createRole);
