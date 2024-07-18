@@ -41,6 +41,6 @@ export class SignupComponent {
   }
   goToLogin(event : Event) {
     event.preventDefault();
-    this.router.navigateByUrl("signup");
+    this.router.navigateByUrl("login");
 }
 }

@@ -27,8 +27,10 @@ export class LoginComponent{
       if(res){
         if (res.role === 'simple-user') {
           alert("We're still reviewing your application to our company");
+          this.AuthService.storeUserData(res.token)
         }else{
-        this.router.navigateByUrl("main");}
+        this.AuthService.storeUserData(res.token)//, res.userId, res.role);
+        this.router.navigateByUrl("navbar");}
       } else{
         console.log(res.message);
       }

@@ -1,1 +1,27 @@
-<p>navbar works!</p>
+<header class="header" role="banner">
+  <h1 class="logo">
+    <a>JOB <span>GATE</span></a>
+  </h1>
+  <div class="nav-wrap">
+    <nav class="main-nav" role="navigation">
+      <ul class="unstyled list-hover-slide">
+        <li (click)="navigateTo('Home', $event)" ><a href="#">Home</a></li>
+        <li (click)="navigateTo('user-profile', $event)" ><a href="#">My Profile</a></li>
+        <li (click)="navigateTo('ResearchById', $event)" ><a href="#">Recherche</a></li><!--recherche blhaq -->
+        <li (click)="navigateTo('Engineers-list', $event)" ><a href="#">Engineers List</a></li>
+        <li (click)="navigateTo('users-list', $event)" ><a href="#">Users List</a></li>
+        <li (click)="navigateTo('Testors-list', $event)" ><a href="#">Testors List</a></li>
+        <li (click)="navigateTo('Responsibles', $event)" ><a href="#">Responsibles</a></li>
+        <li (click)="navigateTo('Logout', $event)" ><a href="#">Logout</a></li>
+      </ul>
+    </nav>
+    <!--
+    <ul class="social-links list-inline unstyled list-hover-slide">
+      <li><a href="#">Twitter</a></li>
+      <li><a href="#">Google+</a></li>
+      <li><a href="#">GitHub</a></li>
+      <li><a href="#">CodePen</a></li>
+    </ul>
+    -->
+  </div>
+</header>
