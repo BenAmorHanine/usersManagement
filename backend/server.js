@@ -21,6 +21,7 @@ const userController = require('./controllers/userController');
 const roleController = require('./controllers/roleController');
 const permissionController = require('./controllers/permissionController.js');
 const authController = require('./controllers/authcontroller.js');
+const authMiddleware = require('./tools/authMiddleware.js')
 
 // Importation des routes
 const userRoutes = require('./routes/users');
@@ -42,6 +43,7 @@ app.get('/', (req, res) => {
   app.get('/users', userController.getAllUsers);
   app.get('/roles', roleController.getAllRoles);
   app.get('/permissions', permissionController.getAllPermissions);
+  //app.get('/users/{id}',userController.getUserById(id));
   
 
   app.post('/users/createuser', userController.createUser);
@@ -50,6 +52,10 @@ app.get('/', (req, res) => {
 
   app.post('/login', authController.login);
   app.post('/signup', authController.signup);
+
+  app.get('/profile', authMiddleware.protect, userController.getUserData);
+  
+app.get('/users/all',authMiddleware.protect,authMiddleware.restrictTo('admin'), userController.getAllUsers);
 
  
   // Middleware pour gérer les routes non trouvées

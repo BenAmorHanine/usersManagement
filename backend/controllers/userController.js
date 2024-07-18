@@ -26,7 +26,7 @@ exports.createUser = async (req, res) => {
 // Récupérer tous les utilisateurs
 exports.getAllUsers = async (req, res) => {
   try {
-    const users = await User.find();
+    const users = await User.find().populate('role', 'name');
     if (users.length === 0) {
       return res.status(404).json({ message: 'Aucun utilisateur trouvé.' });
     }
@@ -101,7 +101,7 @@ exports.getUserData = async (req, res) => {
   try {
     const userId = req.user.id; // Get user ID from the decoded token
 
-    const user = await User.findById(userId).select('-password'); // Exclude the password field
+    const user = await User.findById(userId).select('-password').populate('role', 'name'); // Exclude the password field
     if (!user) {
       return res.status(404).json({ message: 'User not found' });
     }
@@ -115,7 +115,7 @@ exports.getUserData = async (req, res) => {
 
 
 
-// Mettre à jour un utilisateur par ID , peut aussi changer son role 
+// Mettre à jour un utilisateur par ID , peut aussi changer son role
 exports.updateUserById = async (req, res) => {
   try {
     const userId = req.params.id;

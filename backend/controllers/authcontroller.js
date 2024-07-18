@@ -56,10 +56,10 @@ exports.signup = async (req, res) => {
       await newUser.save();
   
       // Generate a token for the new user
-      const secret = process.env.JWT_SECRET || 'default_secret_key';
+      const secret = process.env.JWT_SECRET ;//|| 'default_secret_key';
      const token = generateToken(newUser,secret);
   
-      res.status(201).json({ token, role: userRoleName });
+      res.status(201).json({ token, role: userRoleName, user:user.username });
     } catch (error) {
       console.error('Error during signup:', error);
       res.status(500).json({ message: 'Internal server error' });
@@ -90,10 +90,10 @@ exports.login = async (req, res) => {
       return res.status(401).json({ message: 'Invalid password' });
     }
 
-    const secret = process.env.JWT_SECRET || 'default_secret_key';
+    const secret = process.env.JWT_SECRET ;//|| 'default_secret_key';
     const token = generateToken(user, secret);
 
-    res.json({ user: user.username, role: user.role.name, message: "Welcome" });
+    res.json({ token,userID: user._id ,user: user.username, role: user.role.name, message: "Welcome" });
     console.log("welcome");
   } catch (error) {
     console.error('Error during login:', error);
