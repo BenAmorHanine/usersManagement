@@ -1,6 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { of ,Observable } from 'rxjs';
 
 
 
@@ -21,17 +21,21 @@ export class AuthService{
     const signupData = {username,email, password };
     return this.http.post(`${this.baseUrl}/signup`, signupData);
   }
-  logout(): void {
+  logout(): void{
+    console.log('Logout method called');
     localStorage.removeItem('authToken');
+    console.log("1");
     localStorage.removeItem('userId');
+    console.log("2");
     localStorage.removeItem('role');
+    console.log("3");
   }
   /*storeUserData(token: string, userId: string, role: string): void {
     localStorage.setItem('authToken', token);
     localStorage.setItem('userId', userId);
     localStorage.setItem('role', role);
   }*/
-  storeUserData(token: string): void {
+  storeUserData(token: string): any {
     var extractedtoken= token.split('.')[1];
     var atobdata=atob(extractedtoken);
     var data=JSON.parse(atobdata);

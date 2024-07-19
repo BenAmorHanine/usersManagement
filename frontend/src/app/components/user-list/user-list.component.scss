@@ -1,3 +1,10 @@
+.page-container {
+  background: #a967cd;  /* Fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #4ca1af, #1c4131);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #4ca1af, #c33aaa); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: #fff; /* Couleur de texte blanche pour un meilleur contraste */
+}
+
 body{margin-top:20px;
   display: flex;
   justify-content: center; /* Horizontally center the content */

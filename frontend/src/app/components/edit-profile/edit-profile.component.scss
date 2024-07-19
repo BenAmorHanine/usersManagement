@@ -1,0 +1,154 @@
+/* Global Styles */
+
+/* Global Styles */
+.page-container {
+  background: #a967cd;  /* Fallback for old browsers */
+  background: -webkit-linear-gradient(to right, #4ca1af, #1c4131);  /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to right, #4ca1af, #c33aaa); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  color: #fff; /* Couleur de texte blanche pour un meilleur contraste */
+}
+
+
+/* Container Padding */
+.padding {
+  padding: 3rem !important;
+}
+
+/* Card Styles */
+.card {
+  border-radius: 5px;
+  box-shadow: 0 1px 20px 0 rgba(69, 90, 100, 0.08);
+  border: none;
+  margin-bottom: 30px;
+}
+
+/* Margin Utilities */
+.m-r-0 {
+  margin-right: 0px;
+}
+
+.m-l-0 {
+  margin-left: 0px;
+}
+
+/* User Profile Styles */
+.user-card-full {
+  overflow: hidden;
+}
+
+.user-card-full .user-profile {
+  border-radius: 5px 0 0 5px;
+  background: linear-gradient(to right, #8e23db, #c475d5);
+  color: #fff;
+}
+
+.user-profile {
+  padding: 20px 0;
+}
+
+.user-profile .img-radius {
+  border-radius: 5px;
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+.user-profile h6 {
+  font-size: 18px;
+  font-weight: 600;
+  margin: 10px 0;
+}
+
+.user-profile p {
+  font-size: 14px;
+  color: #ddd;
+}
+
+/* Card Block Styles */
+.card-block {
+  padding: 1.25rem;
+}
+
+.card-block h6 {
+  font-size: 16px;
+  font-weight: 600;
+  border-bottom: 1px solid #e0e0e0;
+  padding-bottom: 5px;
+  margin-bottom: 20px;
+}
+
+.card-block p {
+  line-height: 25px;
+  color: #919aa3;
+}
+
+.card-block .form-group {
+  margin-bottom: 20px;
+}
+
+.card-block .form-group label {
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.card-block .form-group input {
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* Password Visibility Toggle */
+.password-toggle {
+  display: flex;
+  align-items: center;
+}
+
+.password-toggle button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: #007bff;
+}
+
+.password-toggle button:hover {
+  text-decoration: underline;
+}
+
+/* Social Links */
+.user-card-full .social-link {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0;
+  display: flex;
+}
+
+.user-card-full .social-link li {
+  margin-right: 10px;
+}
+
+.user-card-full .social-link li a {
+  font-size: 20px;
+  color: #007bff;
+  transition: color 0.3s ease-in-out;
+}
+
+.user-card-full .social-link li a:hover {
+  color: #0056b3;
+}
+
+/* Responsive Styles */
+@media (min-width: 1400px) {
+  p {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 768px) {
+  .user-profile .img-radius {
+    width: 80px;
+    height: 80px;
+  }
+}
+

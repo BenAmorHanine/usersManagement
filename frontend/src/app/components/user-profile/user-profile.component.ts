@@ -21,7 +21,7 @@ export class UserProfileComponent implements OnInit{
   router = inject(Router)
 
   ngOnInit(): void {
-    const userId = this.authService.getUserId(); // Assuming AuthService has a method to get user ID
+    const userId = this.authService.getUserId();
     if (userId) {
       this.usersService.getUser(userId).subscribe(
         (userData: User) => {
@@ -36,15 +36,29 @@ export class UserProfileComponent implements OnInit{
       console.error('User ID not found in local storage');
     }
   }
-  /*ngOnInit() {
-    const userId = this.authService.getUserId();
-    if (userId) {
-      this.user = this.getUserById(userId);
-    } else {
-      this.router.navigate(['/login']);
+  editProfile(event:Event) {
+    event.preventDefault;
+    this.router.navigateByUrl('edit-profile');
+  }
+
+  confirmDelete( event: Event) {
+    event.preventDefault();
+    if (confirm('Are you sure you want to delete your account?')) {
+      const userId = this.authService.getUserId(); // Obtenez l'ID de l'utilisateur à partir du token JWT
+      if (userId) {
+        this.usersService.delete().subscribe(
+          () => {
+            alert('Account deleted successfully');
+            this.router.navigateByUrl('login');
+          },
+          (error) => {
+            console.error('Failed to delete user account', error);
+            alert('Failed to delete user account');
+          }
+        );
+      } else {
+        console.error('User ID not found in token');
+      }
     }
   }
-  getUserById(id: string): Observable<any>{
-    return this.usersService.getUser(id);
-  }*/
 }

@@ -7,12 +7,12 @@
       <ul class="unstyled list-hover-slide">
         <li (click)="navigateTo('Home', $event)" ><a href="#">Home</a></li>
         <li (click)="navigateTo('user-profile', $event)" ><a href="#">My Profile</a></li>
-        <li (click)="navigateTo('ResearchById', $event)" ><a href="#">Recherche</a></li><!--recherche blhaq -->
-        <li (click)="navigateTo('Engineers-list', $event)" ><a href="#">Engineers List</a></li>
-        <li (click)="navigateTo('users-list', $event)" ><a href="#">Users List</a></li>
-        <li (click)="navigateTo('Testors-list', $event)" ><a href="#">Testors List</a></li>
-        <li (click)="navigateTo('Responsibles', $event)" ><a href="#">Responsibles</a></li>
-        <li (click)="navigateTo('Logout', $event)" ><a href="#">Logout</a></li>
+        <li (click)="navigateTo('ResearchById', $event)" ><a href="#">Research</a></li><!--recherche blhaq -->
+        <li (click)="navigateToList('developers', $event)" ><a href="#">Developers List</a></li>
+        <li (click)="navigateToList('testors', $event)" ><a href="#">Testors List</a></li>
+        <li (click)="navigateToList('responsibles', $event)" ><a href="#">Responsibles List</a></li>
+        <li (click)="navigateToList('appliers', $event)" ><a href="#">appliers List</a></li>
+        <li (click)="logout( $event)" ><a href="#">Logout</a></li>
       </ul>
     </nav>
     <!--

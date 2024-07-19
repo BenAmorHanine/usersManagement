@@ -29,7 +29,9 @@
                 </td>
                 <td>
                   <div>
-                    <button (click)="editUser(data._id, $event)" class="btn btn-primary btn-xs">Edit</button>
+                   <!-- <button (click)="editUser(data._id, $event)" class="btn btn-primary btn-xs">Edit</button>-->
+                   <!-- <button routerLink="edit-user/, data._id" class="btn btn-primary btn-xs">Edit</button>-->
+                    <a [routerLink]="['/edit-user', data._id]" class="btn btn-primary btn-xs"><button class="btn btn-danger btn-xs" >Edit</button></a>
                     <button (click)="deleteUser(data._id, $event)" class="btn btn-danger btn-xs">Delete</button>
                   </div>
                 </td>
@@ -41,14 +43,3 @@
     </div>
   </div>
 </div>
-
-
-
-<!--<button (click)="viewUserDetails(data)" class="btn btn-info btn-xs">View</button>
-                    <button (click)="editUser(data)" class="btn btn-primary btn-xs">Edit</button>
-                    <button (click)="deleteUser(data)" class="btn btn-danger btn-xs">Delete</button>
-
-    <button class="btn btn-info btn-xs">View</button>
-                    <button  class="btn btn-primary btn-xs">Edit</button>
-                    <button  class="btn btn-danger btn-xs">Delete</button>
--->
