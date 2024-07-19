@@ -1,5 +1,6 @@
 
 const User = require('../models/usermodel');
+const Role = require('../models/rolemodel');
 const validateUserData  = require('../tools/validateUserData');
 
 // Créer un nouvel utilisateur
@@ -39,7 +40,11 @@ exports.getAllUsers = async (req, res) => {
 // Get users with role 'dev'
 exports.getDevs = async (req, res) => {
   try {
-    const devs = await User.find({ role: 'dev' });
+    const roleId = await Role.findOne({ name: 'dev' });
+    if (!roleId) {
+      return res.status(404).json({ message: 'Rôle non trouvé.' });
+    }
+    const devs = await User.find({ role: roleId }).populate('role', 'name');
     if (devs.length === 0) {
       return res.status(404).json({ message: 'Aucun développeur trouvé.' });
     }
@@ -52,7 +57,11 @@ exports.getDevs = async (req, res) => {
 // Get users with role 'testor'
 exports.getTestors = async (req, res) => {
   try {
-    const devs = await User.find({ role: 'testor' });
+    const roleId = await Role.findOne({ name: 'testor' });
+    if (!roleId) {
+      return res.status(404).json({ message: 'Rôle non trouvé.' });
+    }
+    const devs = await User.find({ role: roleId }).populate('role', 'name');
     if (devs.length === 0) {
       return res.status(404).json({ message: 'Aucun développeur trouvé.' });
     }
@@ -63,9 +72,29 @@ exports.getTestors = async (req, res) => {
   }
 };
 // Get users with role 'simple-user' //msh aajebni l essm
-exports.getCondidats = async (req, res) => {
+exports.getresps = async (req, res) => {
   try {
-    const devs = await User.find({ role: 'simple-user' });
+    const roleId = await Role.findOne({ name: '/^responsible/' });
+    if (!roleId) {
+      return res.status(404).json({ message: 'Rôle non trouvé.' });
+    }
+    const devs = await User.find({ role: roleId }).populate('role', 'name');
+    if (devs.length === 0) {
+      return res.status(404).json({ message: 'Aucun développeur trouvé.' });
+    }
+    res.status(200).json(devs);
+  } catch (error) {
+    console.error('Erreur lors de la récupération des développeurs:', error);
+    res.status(500).json({ message: 'Erreur interne du serveur.' });
+  }
+};
+exports.getAppliers = async (req, res) => {
+  try {
+    const roleId = await Role.findOne({ name: 'simple-user' });
+    if (!roleId) {
+      return res.status(404).json({ message: 'Rôle non trouvé.' });
+    }
+    const devs = await User.find({ role: roleId }).populate('role', 'name');
     if (devs.length === 0) {
       return res.status(404).json({ message: 'Aucun développeur trouvé.' });
     }
@@ -80,7 +109,7 @@ exports.getCondidats = async (req, res) => {
 exports.getUserById = async (req, res) => {
   try {
     const userId = req.params.id;
-    const user = await User.findById(userId);
+    const user = await User.findById(userId) .populate('role', 'name');;
     if (!user) {
       return res.status(404).json({ message: 'Utilisateur non trouvé.' });
     }
@@ -151,13 +180,6 @@ exports.updateUserAccount = async (req, res) => {
 if (validationError) {
   return res.status(400).json({ message: validationError });
 }
-/* // the hashing is in the pre('save') in the model, isnt it enough?
-if (updateData.password) {
-  if (updateData.password.length < 6) {
-    return res.status(400).json({ message: 'Password must be at least 6 characters long.' });
-  }
-  updateData.password = await bcrypt.hash(updateData.password, 10);
-}*/
   const updatedUser = await User.findByIdAndUpdate(userId, updateData, {
     new: true,
     runValidators: true,
@@ -177,15 +199,23 @@ if (updateData.password) {
 // Update user's role to 'dev'
 exports.updateRoleToDev = async (req, res) => {
   try {
-    const { userId } = req.params; // Extract userId from request parameters
+    const { id } = req.params;
 
     // Check if user exists
-    const user = await User.findById(userId);
+    const user = await User.findById(id);
     if (!user) {
       return res.status(404).json({ message: 'Utilisateur non trouvé.' });
+      console.log("'Utilisateur non trouvé")
     }
 
-    user.role = 'dev';
+    // Find the role by name
+    const role = await Role.findOne({ name: 'dev' });
+    if (!role) {
+      return res.status(404).json({ message: 'Rôle non trouvé.' });
+    }
+
+    // Update user role
+    user.role = role._id;
     await user.save();
 
     res.status(200).json({ message: 'Rôle mis à jour avec succès.', user: user });
@@ -198,15 +228,23 @@ exports.updateRoleToDev = async (req, res) => {
 // Update user's role to 'testor'
 exports.updateRoleToTestor = async (req, res) => {
   try {
-    const { userId } = req.params; // Extract userId from request parameters
+    const { id } = req.params;
 
     // Check if user exists
-    const user = await User.findById(userId);
+    const user = await User.findById(id);
     if (!user) {
       return res.status(404).json({ message: 'Utilisateur non trouvé.' });
+      console.log("'Utilisateur non trouvé")
     }
-    
-    user.role = 'testor';
+
+    // Find the role by name
+    const role = await Role.findOne({ name: 'testor' });
+    if (!role) {
+      return res.status(404).json({ message: 'Rôle non trouvé.' });
+    }
+
+    // Update user role
+    user.role = role._id;
     await user.save();
 
     res.status(200).json({ message: 'Rôle mis à jour avec succès.', user: user });
@@ -215,18 +253,27 @@ exports.updateRoleToTestor = async (req, res) => {
     res.status(500).json({ message: 'Erreur interne du serveur.' });
   }
 };
+
 // Update user's role to 'Resp-dev'
 exports.updateRoleToRespDev = async (req, res) => {
   try {
-    const { userId } = req.params; // Extract userId from request parameters
+    const { id } = req.params;
 
     // Check if user exists
-    const user = await User.findById(userId);
+    const user = await User.findById(id);
     if (!user) {
       return res.status(404).json({ message: 'Utilisateur non trouvé.' });
+      console.log("'Utilisateur non trouvé")
     }
-    
-    user.role = 'Responsible-dev';
+
+    // Find the role by name
+    const role = await Role.findOne({ name: 'responsible-dev' });
+    if (!role) {
+      return res.status(404).json({ message: 'Rôle non trouvé.' });
+    }
+
+    // Update user role
+    user.role = role._id;
     await user.save();
 
     res.status(200).json({ message: 'Rôle mis à jour avec succès.', user: user });
@@ -235,24 +282,81 @@ exports.updateRoleToRespDev = async (req, res) => {
     res.status(500).json({ message: 'Erreur interne du serveur.' });
   }
 };
+
 // Update user's role to 'Responsible-test'
 exports.updateRoleToRespTest = async (req, res) => {
   try {
-    const { userId } = req.params; // Extract userId from request parameters
+    const { id } = req.params;
 
     // Check if user exists
-    const user = await User.findById(userId);
+    const user = await User.findById(id);
     if (!user) {
+      console.log("'Utilisateur non trouvé")
       return res.status(404).json({ message: 'Utilisateur non trouvé.' });
+      }
+    // Find the role by name
+    const role = await Role.findOne({ name: 'responsible-testor' });
+    if (!role) {
+      console.log("role not found")
+      return res.status(404).json({ message: 'Rôle non trouvé.' });
     }
-    
-    user.role = 'Responsible-testor';
+    // Update user role
+    user.role = role._id;
     await user.save();
 
     res.status(200).json({ message: 'Rôle mis à jour avec succès.', user: user });
   } catch (error) {
     console.error('Erreur lors de la mise à jour du rôle à "dev":', error);
     res.status(500).json({ message: 'Erreur interne du serveur.' });
+  }
+};
+exports.updateRoleToAdmin=async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    // Check if user exists
+    const user = await User.findById(id);
+    if (!user) {
+      console.log("'Utilisateur non trouvé")
+      return res.status(404).json({ message: 'Utilisateur non trouvé.' });
+      }
+    // Find the role by name
+    const role = await Role.findOne({ name: 'admin' });
+    if (!role) {
+      console.log("role not found")
+      return res.status(404).json({ message: 'Rôle non trouvé.' });
+    }
+    // Update user role
+    user.role = role._id;
+    await user.save();
+
+    res.status(200).json({ message: 'Rôle mis à jour avec succès.', user: user });
+  } catch (error) {
+    console.error('Erreur lors de la mise à jour du rôle à "dev":', error);
+    res.status(500).json({ message: 'Erreur interne du serveur.' });
+  }
+};
+
+exports.updateUserRole = async (req, res) => {
+  try {
+    const { id: userId, role: newRole } = req.params;
+    // Check if the new role is valid
+    const role = await Role.findOne({ name: newRole });
+    if (!role) {
+      return res.status(400).json({ message: 'Invalid role specified.' });
+    }
+    // Find the user and update the role
+    const user = await User.findById(userId);
+    if (!user) {
+      return res.status(404).json({ message: 'User not found.' });
+    }
+    user.role = role._id; // Assign the role ID
+    await user.save();
+
+    res.status(200).json({ message: 'Role updated successfully.', user });
+  } catch (error) {
+    console.error('Error updating role:', error);
+    res.status(500).json({ message: 'Server error.' });
   }
 };
 
@@ -272,34 +376,9 @@ exports.deleteUserById = async (req, res) => {
     res.status(500).json({ message: 'Erreur interne du serveur.' });
   }
 };
+
 //findbyid et findByIdAndDelete are predefined by mongoose lib
-//autreversion pour:
-/*
-// Delete user by ID
-exports.deleteUserById = async (req, res) => {
-  try {
-    const userId = req.params.userId; // Extract userId from request parameters
 
-    // Check if user exists
-    const user = await User.findById(userId);
-    if (!user) {
-      return res.status(404).json({ message: 'Utilisateur non trouvé.' });
-    }
-
-    // Perform deletion
-    const deletedUser = await User.findByIdAndDelete(userId);
-
-    if (!deletedUser) {
-      return res.status(404).json({ message: 'Utilisateur non trouvé.' });
-    }
-
-    res.status(200).json({ message: 'Utilisateur supprimé avec succès.', user: deletedUser });
-  } catch (error) {
-    console.error('Erreur lors de la suppression de l\'utilisateur par ID:', error);
-    res.status(500).json({ message: 'Erreur interne du serveur.' });
-  }
-};
-*/
 // Delete own account
 exports.deleteUserAccount = async (req, res) => {
   try {
@@ -307,12 +386,14 @@ exports.deleteUserAccount = async (req, res) => {
 
     const user = await User.findById(userId);
     if (!user) {
+      console.log('User not found');
       return res.status(404).json({ message: 'User not found' });
     }
 
     await User.findByIdAndDelete(userId);
     res.json({ message: 'Account deleted successfully' });
   } catch (error) {
+    console.error('Error deleting user:', error);
     res.status(500).json({ message: 'Server error', error });
   }
 };
@@ -320,14 +401,18 @@ exports.deleteUserAccount = async (req, res) => {
 // Change user's role from 'dev' to 'simple-user'
 exports.removeWorkerFromJob = async (req, res) => {
   try {
-    const userId = req.params.userId; // Extract userId from request parameters
+    const id = req.params.id;
 
     // Check if user exists
-    const user = await User.findById(userId);
+    const user = await User.findById(id);
     if (!user) {
       return res.status(404).json({ message: 'Utilisateur non trouvé.' });
     }
-    user.role = 'simple-user';
+    const role = await Role.findOne({ name: 'simple-user' });
+    if (!role) {
+      return res.status(400).json({ message: 'Invalid role specified.' });
+    }
+    user.role = role;
     await user.save();
 
     res.status(200).json({ message: 'Le travailleur a été retiré de son poste avec succès.', user });

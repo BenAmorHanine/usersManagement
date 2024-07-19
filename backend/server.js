@@ -40,7 +40,7 @@ app.get('/', (req, res) => {
     res.send('Helloooooo World!');
   });
   
-  app.get('/users', userController.getAllUsers);
+ // app.get('/users', userController.getAllUsers);
   app.get('/roles', roleController.getAllRoles);
   app.get('/permissions', permissionController.getAllPermissions);
   //app.get('/users/{id}',userController.getUserById(id));
@@ -55,7 +55,7 @@ app.get('/', (req, res) => {
 
   app.get('/profile', authMiddleware.protect, userController.getUserData);
   
-app.get('/users/all',authMiddleware.protect,authMiddleware.restrictTo('admin'), userController.getAllUsers);
+//app.get('/users/all',authMiddleware.protect,authMiddleware.restrictTo('admin'), userController.getAllUsers);
 
  
   // Middleware pour gérer les routes non trouvées
