@@ -4,7 +4,6 @@ import { AuthService } from './Services/auth.service';
 
 import {CommonModule} from '@angular/common';
 import { NavbarComponent } from './components/navbar/navbar.component';
-import { FooterComponent } from './components/footer/footer.component';
 import { MainComponent } from './components/main/main.component';
 import { LoginComponent } from './components/login/login.component';
 
@@ -14,7 +13,6 @@ import { LoginComponent } from './components/login/login.component';
   standalone: true,
   imports: [RouterOutlet,
     CommonModule,
-    FooterComponent,
     NavbarComponent,
     MainComponent,
     LoginComponent],

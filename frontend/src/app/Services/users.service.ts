@@ -53,14 +53,5 @@ export class UsersService {
     return this.http.put(`${this.baseUrl}/users/${id}/role/${role}`,{id,role});
   }
 
-
   }
 
-  /*
-  getUser(id: string):Observable<User>  {
-    const url = `${this.baseUrl}/profile/${id}`;
-    return this.http.get<User>(url);
-  }
-    update(data:any){
-    return this.http.put(`${this.baseUrl}/profile`, data)
-  }*/

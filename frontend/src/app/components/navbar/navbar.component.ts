@@ -16,7 +16,7 @@ export class NavbarComponent {
 
   navigateTo(path: string, event : Event) {
   event.preventDefault();
-  this.router.navigateByUrl(path);
+  this.router.navigateByUrl(`/${path}`);
   }
   navigateToList(listType: string, event : Event) {
     event.preventDefault();

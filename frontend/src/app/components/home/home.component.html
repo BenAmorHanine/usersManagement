@@ -1,0 +1,20 @@
+<app-navbar></app-navbar>
+<div class="todo-container">
+  <h2>My Todo List</h2>
+  <form >
+    <input type="text" [(ngModel)]="newTask" name="newTodo" placeholder="Add a new task" required />
+    <button type="submit" (click)="addTask()">Add Task</button>
+  </form>
+  <ul>
+    <li *ngFor="let task of todos">
+      <span [class.completed]="task.completed">{{ task.text }}</span>
+      <button (click)="toggleTaskCompletion(task)">Toggle</button>
+      <button (click)="deleteTask(task._id)">Delete</button>
+    </li>
+  </ul>
+</div>
+
+<router-outlet></router-outlet>
+
+
+<!-- in the navbar maybe : <app-todo></app-todo>  -->

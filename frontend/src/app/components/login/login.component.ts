@@ -30,7 +30,7 @@ export class LoginComponent{
           this.AuthService.storeUserData(res.token)
         }else{
         this.AuthService.storeUserData(res.token)//, res.userId, res.role);
-        this.router.navigateByUrl("navbar");}
+        this.router.navigateByUrl("main");}
       } else{
         console.log(res.message);
       }

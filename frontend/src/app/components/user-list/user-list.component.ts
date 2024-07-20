@@ -7,12 +7,13 @@ import { Router, RouterOutlet, ActivatedRoute } from '@angular/router';
 import { RouterModule } from '@angular/router'; // Import RouterModule
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NavbarComponent } from "../navbar/navbar.component";
 
 
 @Component({
   selector: 'app-user-list',
   standalone: true,
-  imports: [CommonModule, RouterModule,ReactiveFormsModule,FormsModule],
+  imports: [CommonModule, RouterModule, ReactiveFormsModule, FormsModule, NavbarComponent],
   templateUrl: './user-list.component.html',
   styleUrl: './user-list.component.scss'
 })

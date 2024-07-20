@@ -3,11 +3,12 @@ import { UsersService } from '../../Services/users.service';
 import { User } from '../../classes/user';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { NavbarComponent } from "../navbar/navbar.component";
 
 @Component({
   selector: 'app-research',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, NavbarComponent],
   templateUrl: './research.component.html',
   styleUrl: './research.component.scss'
 })
@@ -17,17 +18,7 @@ export class ResearchComponent {
   errorMessage: string = '';
 
   usersService= inject (UsersService);
-  /*onSubmit(userId: string) {
-    this.usersService.getUserById(userId).subscribe(
-      (data : User) => {
-        this.userData = data;
-        console.log(data);
-      },
-      (error: any) => {
-        console.error('Error fetching user data', error);
-      }
-    );
-  }*/
+
     onSubmit(): void {
       if (this.userId) {
         this.usersService.getUserById(this.userId).subscribe(
