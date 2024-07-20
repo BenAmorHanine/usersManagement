@@ -16,8 +16,8 @@ router.post('/users/create',authMiddleware.protect,authMiddleware.restrictTo('ad
 router.get('/users/all',authMiddleware.protect,authMiddleware.restrictTo('admin'), userController.getAllUsers);
 router.get('/users/appliers',authMiddleware.protect,authMiddleware.restrictTo('admin'), userController.getAppliers); //getsimpleusersmaaneha
 router.get('/users/developers',authMiddleware.protect,authMiddleware.restrictTo('admin','responsible-dev'), userController.getDevs);
-router.get('/users/testors',authMiddleware.protect,authMiddleware.restrictTo('admin','responsible-test'), userController.getTestors);
-router.get('/users/responsibles',authMiddleware.protect,authMiddleware.restrictTo('admin','responsible-test'), userController.getresps);
+router.get('/users/testors',authMiddleware.protect,authMiddleware.restrictTo('admin','responsible-testor'), userController.getTestors);
+router.get('/users/responsibles',authMiddleware.protect,authMiddleware.restrictTo('admin','responsible-testor', 'responsible-dev'), userController.getresps);
 router.get('/users/:id',authMiddleware.protect,authMiddleware.restrictTo('admin'), userController.getUserById);
 //bsh nzidou haja de telle facon kol resp puisque andou lhaq yshouf liste des ing yshouf leurs details
 

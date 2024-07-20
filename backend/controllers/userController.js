@@ -74,7 +74,7 @@ exports.getTestors = async (req, res) => {
 // Get users with role 'simple-user' //msh aajebni l essm
 exports.getresps = async (req, res) => {
   try {
-    const roleId = await Role.findOne({ name: '/^responsible/' });
+    const roleId = await Role.findOne({ name: /responsible/i });
     if (!roleId) {
       return res.status(404).json({ message: 'Rôle non trouvé.' });
     }

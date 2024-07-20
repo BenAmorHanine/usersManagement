@@ -36,7 +36,7 @@ exports.signup = async (req, res) => {
   
       // Find the role in the database
     let userRoleId = '66869b9a47974d16f17f820e'; // Default role ObjectId for simple-user
-    let userRoleName = 'simple-user'; // Default role name
+    let userRoleName = 'appliers'; // Default role name
     if (role) {
       const userRole = await Role.findOne({ name: role });
       if (!userRole) {
@@ -59,7 +59,7 @@ exports.signup = async (req, res) => {
       const secret = process.env.JWT_SECRET ;//|| 'default_secret_key';
      const token = generateToken(newUser,secret);
   
-      res.status(201).json({ token, role: userRoleName, user:user.username });
+      res.status(201).json({ token, role: userRoleName, user:newUser });
     } catch (error) {
       console.error('Error during signup:', error);
       res.status(500).json({ message: 'Internal server error' });
