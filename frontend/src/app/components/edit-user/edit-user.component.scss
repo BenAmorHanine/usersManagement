@@ -1,3 +1,40 @@
+
+.page-content  {
+  max-width: 600px; /* Updated width */
+  margin: 0 auto; /* Centered the container horizontally */
+  //padding: 20px;
+  background-color: #f9f9f9; /* Updated background color */
+  border-radius: 8px; /* Updated border radius */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Added box shadow */
+
+  flex: 1;
+  padding: 1rem;
+  overflow-y: auto;
+}
+body {
+  background-color: #f9f9fa;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.layout-container {
+  display: flex;
+  width: 100%;
+  min-height: 100vh;
+}
+
+.navbar {
+  width: 250px;
+  background-color: #f4f4f4;
+  padding: 1rem;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+  flex-shrink: 0;
+}
+
 body {
   background-color: #f9f9fa
 }

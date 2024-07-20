@@ -23,7 +23,7 @@ export class SignupComponent {
     const username = this.signupObj.username;
 
     this.AuthService.onSignup(username, email, password).subscribe((res: any) =>{
-      if (res && res.token) {
+      if ( res.token) {
         alert("Registered successfully");
         alert("We will review your application to our company");
         this.signupObj.Email = '';
