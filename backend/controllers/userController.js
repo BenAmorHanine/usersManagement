@@ -90,7 +90,7 @@ exports.getresps = async (req, res) => {
 };
 exports.getAppliers = async (req, res) => {
   try {
-    const roleId = await Role.findOne({ name: 'simple-user' });
+    const roleId = await Role.findOne({ name: 'applier' });
     if (!roleId) {
       return res.status(404).json({ message: 'Rôle non trouvé.' });
     }
@@ -408,7 +408,7 @@ exports.removeWorkerFromJob = async (req, res) => {
     if (!user) {
       return res.status(404).json({ message: 'Utilisateur non trouvé.' });
     }
-    const role = await Role.findOne({ name: 'simple-user' });
+    const role = await Role.findOne({ name: 'applier' });
     if (!role) {
       return res.status(400).json({ message: 'Invalid role specified.' });
     }

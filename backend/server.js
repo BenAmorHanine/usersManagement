@@ -19,21 +19,20 @@ Header('Access-Control-Allow-Headers:  Content-Type, Authorization, X-Requested-
 // Importation des controllers
 const userController = require('./controllers/userController');
 const roleController = require('./controllers/roleController');
-const permissionController = require('./controllers/permissionController.js');
 const authController = require('./controllers/authcontroller.js');
 const authMiddleware = require('./tools/authMiddleware.js')
 
 // Importation des routes
 const userRoutes = require('./routes/users');
 const roleRoutes = require('./routes/roles');
-const permissionRoutes = require('./routes/permissions');
 const authRoutes = require('./routes/auth');
+const todoRoutes= require('./routes/todo.js');
 
 // Utilisation des routes
 app.use('/', userRoutes);
 app.use('/', roleRoutes);
-app.use('/', permissionRoutes);
 app.use('/', authRoutes);
+app.use('/', todoRoutes);
 
 
 app.get('/', (req, res) => {
@@ -42,13 +41,11 @@ app.get('/', (req, res) => {
   
  // app.get('/users', userController.getAllUsers);
   app.get('/roles', roleController.getAllRoles);
-  app.get('/permissions', permissionController.getAllPermissions);
   //app.get('/users/{id}',userController.getUserById(id));
   
 
   app.post('/users/createuser', userController.createUser);
   app.post('/roles/createrole', roleController.createRole);
-  app.post('/permissions/createpermission', permissionController.createPermission);
 
   app.post('/login', authController.login);
   app.post('/signup', authController.signup);

@@ -4,8 +4,8 @@ const Role = require('../models/rolemodel');
 // Créer un nouveau rôle
 exports.createRole = async (req, res) => {
   try {
-    const { name, permissions } = req.body;
-    const newRole = new Role({ name, permissions });
+    const { name } = req.body;
+    const newRole = new Role({ name });
     await newRole.save();
     res.status(201).json({ message: 'Rôle créé avec succès.', role: newRole });
   } catch (error) {

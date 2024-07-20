@@ -3,7 +3,6 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
 const authMiddleware = require('../tools/authMiddleware');
-const checkPermission = require('../tools/checkPermission');
 
 //user actions (every user)
 router.delete('/profile', authMiddleware.protect, userController.deleteUserAccount); // Delete own account

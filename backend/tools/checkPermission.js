@@ -1,4 +1,4 @@
-const User = require('../models/usermodel');
+/*const User = require('../models/usermodel');
 const Role = require('../models/rolemodel');
 const Permission = require('../models/Permissionmodel');
 
@@ -27,3 +27,4 @@ const checkPermission = (requiredPermission) => {
 };
 
 module.exports = checkPermission;
+*/
