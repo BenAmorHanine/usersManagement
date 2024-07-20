@@ -1,4 +1,8 @@
 <app-navbar></app-navbar>
+<div class="layout-container">
+  <div class="navbar">
+    <!-- You can include your navbar content here if needed -->
+  </div>
 <div class="todo-container">
   <h2>My Todo List</h2>
   <form >
@@ -12,6 +16,7 @@
       <button (click)="deleteTask(task._id)">Delete</button>
     </li>
   </ul>
+</div>
 </div>
 
 <router-outlet></router-outlet>

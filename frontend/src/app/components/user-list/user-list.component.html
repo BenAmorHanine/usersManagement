@@ -1,44 +1,48 @@
-<app-navbar></app-navbar>
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <div class="main-box clearfix">
-        <div class="table-responsive">
-          <table class="table user-list">
-            <thead>
-              <tr>
-                <th><span>User</span></th>
-                <th><span>Created</span></th>
-                <th class="text-center"><span>Role</span></th>
-                <th><span>Email</span></th>
-                <th><span>Actions</span></th> <!-- Added a new th for actions -->
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let data of user | async">
-                <td>
-                  <span class="user-link">{{ data.username }}</span>
-                </td>
-                <td>
-                  <span>{{data.createdAt}}</span> <!-- Replace with actual date -->
-                </td>
-                <td class="text-center">
-                  <span class="label label-default">{{data.role.name}}</span>
-                </td>
-                <td>
-                  <span>{{ data.email }}</span>
-                </td>
-                <td>
-                  <div>
-                   <!-- <button (click)="editUser(data._id, $event)" class="btn btn-primary btn-xs">Edit</button>-->
-                   <!-- <button routerLink="edit-user/, data._id" class="btn btn-primary btn-xs">Edit</button>-->
-                    <a [routerLink]="['/edit-user', data._id]" class="btn btn-primary btn-xs"><button class="btn btn-danger btn-xs" >Edit</button></a>
-                    <button (click)="deleteUser(data._id, $event)" class="btn btn-danger btn-xs">Delete</button>
-                  </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
+<div class="layout-container">
+  <app-navbar class="navbar"></app-navbar>
+  <div class="content">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-12">
+          <div class="main-box clearfix">
+            <div class="table-responsive">
+              <table class="table user-list">
+                <thead>
+                  <tr>
+                    <th><span>User</span></th>
+                    <th><span>Created</span></th>
+                    <th class="text-center"><span>Role</span></th>
+                    <th><span>Email</span></th>
+                    <th><span>Actions</span></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let data of user | async">
+                    <td>
+                      <span class="user-link">{{ data.username }}</span>
+                    </td>
+                    <td>
+                      <span>{{data.createdAt}}</span>
+                    </td>
+                    <td class="text-center">
+                      <span class="label label-default">{{data.role.name}}</span>
+                    </td>
+                    <td>
+                      <span>{{ data.email }}</span>
+                    </td>
+                    <td>
+                      <div>
+                        <a [routerLink]="['/edit-user', data._id]" class="btn btn-primary btn-xs">
+                          <button class="btn btn-danger btn-xs">Edit</button>
+                        </a>
+                        <button (click)="deleteUser(data._id, $event)" class="btn btn-danger btn-xs">Delete</button>
+                      </div>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
         </div>
       </div>
     </div>

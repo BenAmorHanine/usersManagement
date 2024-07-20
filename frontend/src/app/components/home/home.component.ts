@@ -7,12 +7,7 @@ import { Observable } from 'rxjs';
 import { AuthService } from '../../Services/auth.service';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { RouterOutlet } from '@angular/router';
-
-interface Task {
-  text: string;
-  completed: boolean;
-}
-
+import { Task } from '../../classes/task';
 
 @Component({
   selector: 'app-home',

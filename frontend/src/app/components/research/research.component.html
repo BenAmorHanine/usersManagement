@@ -1,19 +1,23 @@
-<app-navbar></app-navbar>
-<div class="container">
-  <h2>Research User Data</h2>
-  <form class = user-data role="search">
-    <input id="search" type="search"class="login__input" [(ngModel)]="userId" name="userId" placeholder="Enter User ID" autofocus required />
-    <button type="submit"  class="login__submit" (click)="fetch($event)">Fetch</button>
-  </form>
+<div class="layout-container">
+  <app-navbar class="navbar"></app-navbar>
+  <div class="content">
+    <div class="container">
+      <h2>Research User Data</h2>
+      <form class="user-data" role="search">
+        <input id="search" type="search" class="login__input" [(ngModel)]="userId" name="userId" placeholder="Enter User ID" autofocus required />
+        <button type="submit" class="login__submit" (click)="fetch($event)">Fetch</button>
+      </form>
 
-  <div class="user-data" *ngIf="userData">
-    <h3>User Data:</h3>
-    <p><strong>Username:</strong> {{ userData.username }}</p>
-    <p><strong>Email:</strong> {{ userData.email }}</p>
-    <p><strong>Role:</strong> {{ userData.role.name }}</p>
-  </div>
+      <div class="user-data" *ngIf="userData">
+        <h3>User Data:</h3>
+        <p><strong>Username:</strong> {{ userData.username }}</p>
+        <p><strong>Email:</strong> {{ userData.email }}</p>
+        <p><strong>Role:</strong> {{ userData.role.name }}</p>
+      </div>
 
-  <div class="user-data" *ngIf="errorMessage">
-    <p>{{ errorMessage }}</p>
+      <div class="user-data" *ngIf="errorMessage">
+        <p>{{ errorMessage }}</p>
+      </div>
+    </div>
   </div>
 </div>
