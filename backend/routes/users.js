@@ -4,11 +4,11 @@ const router = express.Router();
 const userController = require('../controllers/userController');
 const authMiddleware = require('../tools/authMiddleware');
 
-//user actions (every user)
+//user actions
 router.delete('/profile', authMiddleware.protect, userController.deleteUserAccount); // Delete own account
 router.put('/profile', authMiddleware.protect, userController.updateUserAccount); // update own account (except his role)
 router.get('/profile', authMiddleware.protect, userController.getUserData); // get own data
-//the creation of the account hayka fl auth.js : signup
+
 
 router.post('/users/create',authMiddleware.protect,authMiddleware.restrictTo('admin'), userController.createUser); //l'admin kahaw
 
@@ -23,6 +23,7 @@ router.get('/users/:id',authMiddleware.protect,authMiddleware.restrictTo('admin'
 
 //admin only
 router.put('/users/:id',authMiddleware.protect,authMiddleware.restrictTo('admin'), userController.updateUserById);
+
 router.delete('/users/:id', authMiddleware.protect, authMiddleware.restrictTo('admin'), userController.deleteUserById); // Admin deleting a user
 
 //updating roles and data

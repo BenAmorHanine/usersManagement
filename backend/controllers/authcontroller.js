@@ -56,8 +56,8 @@ exports.signup = async (req, res) => {
       await newUser.save();
   
       // Generate a token for the new user
-      const secret = process.env.JWT_SECRET ;//|| 'default_secret_key';
-     const token = generateToken(newUser,secret);
+    const secret = process.env.JWT_SECRET ;//|| 'default_secret_key';
+    const token = generateToken(newUser,secret);
   
       res.status(201).json({ token, role: userRoleName, user:newUser });
     } catch (error) {
